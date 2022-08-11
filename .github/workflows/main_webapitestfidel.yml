@@ -12,6 +12,8 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    env:
+      SOLUTIONPATH: WebAPITest/WebAPITest.sln
 
     steps:
       - uses: actions/checkout@v2
@@ -19,14 +21,13 @@ jobs:
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '3.1.301'
-          include-prerelease: true
+          dotnet-version: '3.1.301'          
 
       - name: Build with dotnet
-        run: dotnet build ./WebAPITest.csproj --configuration Release --no-restore
+        run: dotnet build ${{env.SOLUTIONPATH}}
 
       - name: dotnet publish
-        run: dotnet publish ./WebAPITest.csproj -c Release -o website
+        run: dotnet publish ${{env.SOLUTIONPATH}} -c Release -o website
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
