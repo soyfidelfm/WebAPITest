@@ -23,10 +23,10 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
-        run: dotnet build WebAPITest/WebAPITest.csproj --configuration Release --no-restore
+        run: dotnet build ./WebAPITest.csproj --configuration Release --no-restore
 
       - name: dotnet publish
-        run: dotnet publish WebAPITest/WebAPITest.csproj -c Release -o website
+        run: dotnet publish ./WebAPITest.csproj -c Release -o website
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
